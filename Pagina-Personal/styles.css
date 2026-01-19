@@ -37,7 +37,7 @@ body{
 /* Proyectos / Platillos */
 .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem}
 .project-card{background:#fff;border:2px solid rgba(0,0,0,0.08);border-radius:var(--radius);padding:1rem;display:flex;flex-direction:column;box-shadow:0 6px 0 rgba(0,0,0,0.04)}
-.project-card img{width:100%;height:auto;border-radius:6px;object-fit:cover}
+.project-card img{width:100%;height:auto;border-radius:6px;object-fit:cover;aspect-ratio:16/9;max-height:220px}
 .project-card h3{margin:.75rem 0 .25rem;color:var(--brand-black)}
 .project-card p{margin:.25rem 0;color:var(--muted)}
 .project-card a{color:var(--accent);text-decoration:none}
