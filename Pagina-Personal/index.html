@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Monkey Papas — Sabores rápidos y deliciosos</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<a class="skip-link" href="#main">Saltar al contenido</a>
+
+	<header id="hero" class="site-hero" role="banner">
+		<div class="container">
+			<h1>Monkey Papas</h1>
+			<p class="tagline">Papas, wraps y combos rápidos — sabor casero para llevar.</p>
+
+			<section class="mission-vision" aria-labelledby="mv-title">
+				<h2 id="mv-title">Misión y Visión</h2>
+				<p><strong>Misión:</strong> Entregar papas y snacks con sabor único, ingredientes frescos y servicio rápido para llevar o a domicilio.</p>
+				<p><strong>Premisa:</strong> Combinamos recetas creativas con una experiencia informal y accesible — comida que se disfruta al instante.</p>
+			</section>
+		</div>
+	</header>
+
+	<main id="main" class="container" role="main">
+		<section id="projects" class="projects" aria-labelledby="projects-title">
+			<h2 id="projects-title">Nuestros Platillos</h2>
+
+			<div class="projects-grid">
+				<article class="project-card">
+					<a href="https://via.placeholder.com/800x400" target="_blank" rel="noopener" aria-label="Ver imagen de Papas Clásicas">
+						<img src="https://via.placeholder.com/400x220?text=Papas+Cl%C3%A1sicas" alt="Papas clásicas con salsa" />
+					</a>
+					<h3>Papas Clásicas</h3>
+					<p>Papas fritas en corte casero, crujientes y servidas con nuestra salsa secreta.</p>
+					<p><a href="https://example.com/menu#papas" target="_blank" rel="noopener">Ver en el menú</a></p>
+				</article>
+
+				<article class="project-card">
+					<a href="https://via.placeholder.com/800x400" target="_blank" rel="noopener" aria-label="Ver imagen de Combo Monkey">
+						<img src="https://via.placeholder.com/400x220?text=Combo+Monkey" alt="Combo con papas, bebida y snack" />
+					</a>
+					<h3>Combo Monkey</h3>
+					<p>Una porción de papas, mini wrap y bebida — ideal para el almuerzo rápido.</p>
+					<p><a href="https://example.com/menu#combo" target="_blank" rel="noopener">Ver en el menú</a></p>
+				</article>
+
+				<article class="project-card">
+					<a href="https://via.placeholder.com/800x400" target="_blank" rel="noopener" aria-label="Ver imagen de Wrap Vegetal">
+						<img src="https://via.placeholder.com/400x220?text=Wrap+Vegetal" alt="Wrap vegetal fresco" />
+					</a>
+					<h3>Wrap Vegetal</h3>
+					<p>Wrap fresco con vegetales, salsa ligera y opción de añadir pollo o queso.</p>
+					<p><a href="https://example.com/menu#wrap" target="_blank" rel="noopener">Ver en el menú</a></p>
+				</article>
+			</div>
+		</section>
+
+		<section id="contact" class="contact" aria-labelledby="contact-title">
+			<h2 id="contact-title">Pedidos a domicilio</h2>
+			<p>Realiza tu pedido para entrega a domicilio o para recoger. Completa el formulario o llama/WhatsApp al <strong>+52 55 1234 5678</strong>.</p>
+
+			<form id="contact-form" class="contact-form" action="#" method="post" novalidate>
+				<div class="form-row">
+					<label for="name">Nombre</label>
+					<input id="name" name="name" type="text" required aria-required="true" placeholder="Tu nombre" />
+				</div>
+
+				<div class="form-row">
+					<label for="phone">Teléfono / WhatsApp</label>
+					<input id="phone" name="phone" type="text" required aria-required="true" placeholder="(55) 1234 5678" />
+				</div>
+
+				<div class="form-row">
+					<label for="address">Dirección de entrega</label>
+					<input id="address" name="address" type="text" required aria-required="true" placeholder="Calle, número, colonia" />
+				</div>
+
+				<div class="form-row">
+					<label for="order">Pedido (describe lo que quieres)</label>
+					<textarea id="order" name="order" rows="5" required aria-required="true" minlength="5" placeholder="Ej: 1 Monkey, 1 Original con extra queso, 2 bebidas"></textarea>
+				</div>
+
+				<div class="form-row">
+					<label for="when">Para recoger / entregar (día y hora)</label>
+					<input id="when" name="when" type="text" placeholder="Hoy 13:15 / En 30 min" />
+				</div>
+
+				<div class="form-row">
+					<button type="submit" class="btn">Enviar pedido</button>
+				</div>
+
+				<p id="form-feedback" class="form-feedback" aria-live="polite"></p>
+			</form>
+		</section>
+	</main>
+
+	<footer class="site-footer" role="contentinfo">
+		<div class="container footer-inner">
+			<nav class="social" aria-label="Redes sociales">
+				<a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">Facebook</a>
+				<a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter">Twitter</a>
+				<a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a>
+			</nav>
+			<p>&copy; <span id="year"></span> Soluciones Ágora. Todos los derechos reservados.</p>
+		</div>
+	</footer>
+
+	<script>
+		// Mostrar año actual
+		document.getElementById('year').textContent = new Date().getFullYear();
+
+		// Validación simple al enviar
+		(function(){
+			const form = document.getElementById('contact-form');
+			const feedback = document.getElementById('form-feedback');
+
+			form.addEventListener('submit', function(e){
+				e.preventDefault();
+				if(!form.checkValidity()){
+					feedback.textContent = 'Por favor completa correctamente todos los campos.';
+					feedback.style.color = '#b00020';
+					// Let the browser show native hints for invalid fields as well
+					form.reportValidity();
+					return;
+				}
+
+				// Simular envío exitoso
+				feedback.textContent = 'Gracias — tu pedido ha sido recibido. Te contactaremos pronto.';
+				feedback.style.color = '#00695c';
+				form.reset();
+			});
+		})();
+	</script>
+</body>
+</html>
