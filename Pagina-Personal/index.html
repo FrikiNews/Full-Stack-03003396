@@ -9,11 +9,13 @@
 <body>
 	<a class="skip-link" href="#main">Saltar al contenido</a>
 
+	<!-- Sección: Encabezado principal (Hero) -->
 	<header id="hero" class="site-hero" role="banner">
 		<div class="container">
 			<h1>Monkey Papas</h1>
 			<p class="tagline">Papas, wraps y combos rápidos — sabor casero para llevar.</p>
 
+			<!-- Sección: Misión y Visión -->
 			<section class="mission-vision" aria-labelledby="mv-title">
 				<h2 id="mv-title">Misión y Visión</h2>
 				<p><strong>Misión:</strong> Entregar papas y snacks con sabor único, ingredientes frescos y servicio rápido para llevar o a domicilio.</p>
@@ -22,7 +24,9 @@
 		</div>
 	</header>
 
+	<!-- Sección: Contenido principal -->
 	<main id="main" class="container" role="main">
+		<!-- Sección: Nuestros platillos / Proyectos -->
 		<section id="projects" class="projects" aria-labelledby="projects-title">
 			<h2 id="projects-title">Nuestros Platillos</h2>
 
@@ -56,10 +60,12 @@
 			</div>
 		</section>
 
+		<!-- Sección: Contacto / Pedidos -->
 		<section id="contact" class="contact" aria-labelledby="contact-title">
 			<h2 id="contact-title">Pedidos a domicilio</h2>
 			<p>Realiza tu pedido para entrega a domicilio o para recoger. Completa el formulario o llama/WhatsApp al <strong>+52 55 1234 5678</strong>.</p>
 
+			<!-- Formulario de contacto/pedido -->
 			<form id="contact-form" class="contact-form" action="#" method="post" novalidate>
 				<div class="form-row">
 					<label for="name">Nombre</label>
@@ -95,8 +101,10 @@
 		</section>
 	</main>
 
+	<!-- Sección: Pie de página -->
 	<footer class="site-footer" role="contentinfo">
 		<div class="container footer-inner">
+			<!-- Navegación: Redes sociales -->
 			<nav class="social" aria-label="Redes sociales">
 				<a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">Facebook</a>
 				<a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter">Twitter</a>
@@ -106,6 +114,7 @@
 		</div>
 	</footer>
 
+	<!-- Script: funcionalidades pequeñas (año dinámico y validación simple del formulario) -->
 	<script>
 		// Mostrar año actual
 		document.getElementById('year').textContent = new Date().getFullYear();
@@ -120,7 +129,7 @@
 				if(!form.checkValidity()){
 					feedback.textContent = 'Por favor completa correctamente todos los campos.';
 					feedback.style.color = '#b00020';
-					// Let the browser show native hints for invalid fields as well
+					// Permitir que el navegador muestre sus ayudas nativas para campos inválidos
 					form.reportValidity();
 					return;
 				}
