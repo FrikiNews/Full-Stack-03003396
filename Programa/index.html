@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Gestor de Tareas</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Gestor de Tareas</h1>
+            <div class="input-row">
+                <input id="entrada-tarea" type="text" placeholder="Escribe una nueva tarea..." aria-label="Nueva tarea">
+                <button id="btn-agregar-tarea">Agregar tarea</button>
+            </div>
+            <div id="mensaje-error" role="alert" aria-live="polite"></div>
+            <ul id="lista-tareas"></ul>
+        </div>
+
+        <script src="app.js" defer></script>
+    </body>
+</html>

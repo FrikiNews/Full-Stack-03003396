@@ -1,0 +1,208 @@
+/* ------------------ Variables CSS ------------------ */
+:root{
+	--bg-color: #f4f7fb;
+	--primary: #1e6fb8;
+	--accent: #2b8af6;
+	--card-bg: #ffffff;
+	--text: #14202b;
+	--muted: #607080;
+	--success: #1f8a3d;
+	--warning: #d19a07;
+	--danger: #b42323;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+	font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+	background-color:var(--bg-color);
+	color:var(--text);
+	margin:0;
+	padding:24px;
+	-webkit-font-smoothing:antialiased;
+}
+
+/* ------------------ Contenedor central ------------------ */
+.container{
+	max-width:900px;
+	width:90%;
+	margin:0 auto;
+}
+
+h1,
+#encabezado{
+	color:var(--primary);
+	text-align:center;
+	margin:0 0 12px;
+	font-size:1.8rem;
+}
+
+/* ------------------ Descripción reutilizable ------------------ */
+.descripcion{
+	color:var(--muted);
+	font-size:0.95rem;
+	text-align:center;
+	margin-bottom:12px;
+}
+
+/* ------------------ Tarjeta / Card ------------------ */
+.card{
+	background-color:var(--card-bg);
+	margin:16px auto;
+	padding:18px;
+	width:80%;
+	border-radius:10px;
+	box-shadow:0 6px 18px rgba(16,24,40,0.06);
+}
+
+/* ------------------ Fila de entrada / Input Row ------------------ */
+.input-row{
+	display:flex;
+	gap:8px;
+	align-items:center;
+	justify-content:center;
+	margin-bottom:14px;
+}
+
+#entrada-tarea{
+	flex:1;
+	padding:10px 12px;
+	border:1px solid #d1dbe8;
+	border-radius:8px;
+	font-size:1rem;
+}
+
+/* ------------------ Mensajes de error ------------------ */
+#mensaje-error{
+	color:#b42323;
+	font-size:0.9rem;
+	text-align:center;
+	min-height:1.2em;
+	margin-bottom:8px;
+}
+
+/* ------------------ Listas y contenedores de lista ------------------ */
+ul{
+	padding-left:1.25rem;
+	margin:0 0 12px 0;
+}
+
+/* ------------------ Lista de tareas (UL) ------------------ */
+ul#lista-tareas{
+	list-style:none;
+	padding-left:0;
+}
+
+ul#lista-tareas li{
+	margin:8px auto;
+	padding:8px;
+	max-width:800px;
+	width:85%;
+	background:rgba(255,255,255,0.65);
+	border-radius:8px;
+	display:flex;
+	justify-content:space-between;
+	align-items:center;
+	gap:12px;
+	font-size:0.95rem;
+}
+
+/* ------------------ Edición en línea / Inline Edit ------------------ */
+.left{
+	flex:1;
+	display:flex;
+	justify-content:center; 
+	align-items:center; 
+}
+.actions{flex-shrink:0}
+
+.task-name{
+	width:100%;
+	text-align:center;
+	display:block;
+}
+
+.edit-input{
+	background:transparent;
+	border:1px solid rgba(20,32,43,0.06);
+	padding:6px 8px;
+	border-radius:6px;
+	width:100%;
+	font-size:inherit;
+	color:inherit;
+	box-shadow:none;
+	outline:none;
+	display:block;
+	text-align:center; /* centrar texto al editar */
+}
+
+.edit-input:focus{
+	box-shadow:0 6px 18px rgba(16,24,40,0.04);
+	border-color:rgba(27,118,204,0.14);
+	background:rgba(255,255,255,0.03);
+}
+
+/* ------------------ Interacciones y transiciones ------------------ */
+ul#lista-tareas li{
+	cursor:pointer;
+	transition: background-color 200ms ease, box-shadow 200ms ease, transform 120ms ease;
+}
+
+/* ------------------ Estado: completada ------------------ */
+ul#lista-tareas li.completed{
+	background:#e6f9ea;
+	color:#155724;
+	box-shadow:0 8px 24px rgba(31,138,61,0.18);
+	transform:translateY(-2px);
+}
+
+/* ------------------ Botones principales ------------------ */
+.boton,
+button,
+#btn-agregar-tarea{
+	background-color:var(--accent);
+	color:#fff;
+	padding:8px 14px;
+	border-radius:8px;
+	border:none;
+	cursor:pointer;
+	text-decoration:none;
+	font-weight:600;
+}
+
+button:focus,
+.boton:focus{
+	outline:3px solid rgba(43,138,246,0.18);
+	outline-offset:2px;
+}
+
+.boton:hover,
+button:hover,
+#btn-agregar-tarea:hover{
+	background-color:#1f6fe0;
+}
+
+/* ------------------ Botones de acciones (editar/eliminar/guardar) ------------------ */
+.actions button{
+	background:transparent;
+	border:none;
+	color:var(--muted);
+	padding:6px 10px;
+	border-radius:6px;
+	cursor:pointer;
+	transition: background-color 180ms ease, color 180ms ease, transform 120ms ease;
+}
+
+.actions button:hover{ transform:translateY(-2px); }
+
+.actions .save:hover{ background: rgba(31,138,61,0.12); color:var(--success); }
+.actions .edit:hover{ background: rgba(209,154,7,0.12); color:var(--warning); }
+.actions .delete:hover{ background: rgba(180,36,35,0.12); color:var(--danger); }
+
+/* ------------------ Responsive / Media queries ------------------ */
+@media (max-width:520px){
+	.card{width:95%}
+	h1{font-size:1.4rem}
+	.input-row{flex-direction:column;align-items:stretch}
+	#entrada-tarea{width:100%}
+}
