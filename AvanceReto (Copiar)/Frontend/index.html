@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mantenimiento Vehicular</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <h1>Mantenimiento Vehicular</h1>
+      <p>Gestion basica de vehiculos y servicios</p>
+    </header>
+
+    <main class="grid">
+      <section class="panel">
+        <h2>Vehiculos</h2>
+        <form id="vehicle-form" class="form">
+          <input type="hidden" id="vehicle-id" />
+          <label>
+            Marca
+            <input type="text" id="brand" required />
+          </label>
+          <label>
+            Modelo
+            <input type="text" id="model" required />
+          </label>
+          <label>
+            Año
+            <input type="number" id="year" min="1900" required />
+          </label>
+          <label>
+            Placa
+            <input type="text" id="plate" required />
+          </label>
+          <button type="submit" id="vehicle-submit">Guardar vehiculo</button>
+          <button type="button" id="vehicle-cancel" class="ghost">Cancelar</button>
+        </form>
+        <ul id="vehicle-list" class="list"></ul>
+      </section>
+
+      <section class="panel">
+        <h2>Servicios</h2>
+        <p id="service-hint">Selecciona un vehiculo para ver servicios.</p>
+        <form id="service-form" class="form" aria-disabled="true">
+          <input type="hidden" id="service-id" />
+          <label>
+            Tipo de servicio
+            <input type="text" id="service-type" required />
+          </label>
+          <label>
+            Fecha
+            <input type="date" id="service-date" required />
+          </label>
+          <label>
+            Descripcion
+            <textarea id="service-description" rows="2"></textarea>
+          </label>
+          <label>
+            Costo
+            <input type="number" id="service-cost" min="0" step="0.01" required />
+          </label>
+          <button type="submit" id="service-submit">Guardar servicio</button>
+          <button type="button" id="service-cancel" class="ghost">Cancelar</button>
+        </form>
+        <ul id="service-list" class="list"></ul>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
