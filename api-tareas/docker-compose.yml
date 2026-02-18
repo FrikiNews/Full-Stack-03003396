@@ -1,0 +1,40 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: restaurante-mongo
+    restart: unless-stopped
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  backend:
+    build:
+      context: ./backend
+    container_name: restaurante-backend
+    restart: unless-stopped
+    environment:
+      PORT: 4000
+      MONGO_URI: mongodb://mongo:27017/restaurante_citas
+      SESSION_SECRET: docker-session-secret
+      CLIENT_URL: http://localhost:5173
+      NODE_ENV: production
+    depends_on:
+      - mongo
+    ports:
+      - "4000:4000"
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_URL: http://localhost:4000/api
+    container_name: restaurante-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "5173:80"
+
+volumes:
+  mongo_data:
