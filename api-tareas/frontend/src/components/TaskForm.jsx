@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 
 const initialForm = {
-  customerName: '',
-  phone: '',
-  dateTime: '',
-  people: 2,
-  tableNumber: '',
-  status: 'pendiente',
+  productName: '',
+  category: '',
+  unit: 'piezas',
+  quantity: 0,
+  minStock: 0,
+  supplier: '',
   notes: ''
 };
 
@@ -20,12 +20,12 @@ function TaskForm({ editingTask, onSubmit, onCancelEdit }) {
     }
 
     setForm({
-      customerName: editingTask.customerName || '',
-      phone: editingTask.phone || '',
-      dateTime: editingTask.dateTime ? new Date(editingTask.dateTime).toISOString().slice(0, 16) : '',
-      people: editingTask.people || 2,
-      tableNumber: editingTask.tableNumber ?? '',
-      status: editingTask.status || 'pendiente',
+      productName: editingTask.productName || '',
+      category: editingTask.category || '',
+      unit: editingTask.unit || 'piezas',
+      quantity: editingTask.quantity ?? 0,
+      minStock: editingTask.minStock ?? 0,
+      supplier: editingTask.supplier || '',
       notes: editingTask.notes || ''
     });
   }, [editingTask]);
@@ -40,8 +40,8 @@ function TaskForm({ editingTask, onSubmit, onCancelEdit }) {
 
     await onSubmit({
       ...form,
-      people: Number(form.people),
-      tableNumber: form.tableNumber === '' ? undefined : Number(form.tableNumber)
+      quantity: Number(form.quantity),
+      minStock: Number(form.minStock)
     });
 
     if (!editingTask) {
@@ -51,40 +51,41 @@ function TaskForm({ editingTask, onSubmit, onCancelEdit }) {
 
   return (
     <form className="card form-grid" onSubmit={handleSubmit}>
-      <h2>{editingTask ? 'Editar cita' : 'Nueva cita'}</h2>
+      <h2>{editingTask ? 'Editar producto' : 'Nuevo producto'}</h2>
 
       <label>
-        Cliente
-        <input name="customerName" value={form.customerName} onChange={handleChange} required />
+        Producto
+        <input name="productName" value={form.productName} onChange={handleChange} required />
       </label>
 
       <label>
-        Teléfono
-        <input name="phone" value={form.phone} onChange={handleChange} required />
+        Categoría
+        <input name="category" value={form.category} onChange={handleChange} required />
       </label>
 
       <label>
-        Fecha y hora
-        <input type="datetime-local" name="dateTime" value={form.dateTime} onChange={handleChange} required />
-      </label>
-
-      <label>
-        Personas
-        <input type="number" min="1" max="30" name="people" value={form.people} onChange={handleChange} required />
-      </label>
-
-      <label>
-        Mesa
-        <input type="number" min="1" max="200" name="tableNumber" value={form.tableNumber} onChange={handleChange} />
-      </label>
-
-      <label>
-        Estado
-        <select name="status" value={form.status} onChange={handleChange}>
-          <option value="pendiente">Pendiente</option>
-          <option value="confirmada">Confirmada</option>
-          <option value="cancelada">Cancelada</option>
+        Unidad
+        <select name="unit" value={form.unit} onChange={handleChange}>
+          <option value="piezas">Piezas</option>
+          <option value="kg">Kg</option>
+          <option value="litros">Litros</option>
+          <option value="cajas">Cajas</option>
         </select>
+      </label>
+
+      <label>
+        Cantidad
+        <input type="number" min="0" max="100000" name="quantity" value={form.quantity} onChange={handleChange} required />
+      </label>
+
+      <label>
+        Stock mínimo
+        <input type="number" min="0" max="100000" name="minStock" value={form.minStock} onChange={handleChange} required />
+      </label>
+
+      <label>
+        Proveedor
+        <input name="supplier" value={form.supplier} onChange={handleChange} />
       </label>
 
       <label>
@@ -93,7 +94,7 @@ function TaskForm({ editingTask, onSubmit, onCancelEdit }) {
       </label>
 
       <div className="form-actions">
-        <button type="submit">{editingTask ? 'Guardar cambios' : 'Crear cita'}</button>
+        <button type="submit">{editingTask ? 'Guardar cambios' : 'Crear producto'}</button>
         {editingTask && (
           <button type="button" className="btn-secondary" onClick={onCancelEdit}>
             Cancelar

@@ -1,42 +1,63 @@
 const mongoose = require('mongoose');
 
+function calculateStatus(quantity, minStock) {
+  const parsedQuantity = Number(quantity ?? 0);
+  const parsedMinStock = Number(minStock ?? 0);
+
+  if (parsedQuantity <= 0) {
+    return 'agotado';
+  }
+
+  if (parsedQuantity <= parsedMinStock) {
+    return 'bajo_stock';
+  }
+
+  return 'disponible';
+}
+
 const taskSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true
   },
-  customerName: {
+  productName: {
     type: String,
     required: true,
     trim: true,
     maxlength: 120
   },
-  phone: {
+  category: {
     type: String,
     required: true,
     trim: true,
-    maxlength: 25
+    maxlength: 80
   },
-  dateTime: {
-    type: Date,
+  unit: {
+    type: String,
     required: true
   },
-  people: {
+  quantity: {
     type: Number,
     required: true,
-    min: 1,
-    max: 30
+    min: 0,
+    max: 100000
   },
-  tableNumber: {
+  minStock: {
     type: Number,
-    min: 1,
-    max: 200
+    min: 0,
+    max: 100000,
+    default: 0
+  },
+  supplier: {
+    type: String,
+    trim: true,
+    maxlength: 120
   },
   status: {
     type: String,
-    enum: ['pendiente', 'confirmada', 'cancelada'],
-    default: 'pendiente'
+    enum: ['disponible', 'bajo_stock', 'agotado'],
+    default: 'disponible'
   },
   notes: {
     type: String,
@@ -45,6 +66,25 @@ const taskSchema = new mongoose.Schema({
   }
 }, {
   timestamps: true
+});
+
+taskSchema.pre('validate', function autoStatusOnValidate(next) {
+  this.status = calculateStatus(this.quantity, this.minStock);
+  next();
+});
+
+taskSchema.pre('findOneAndUpdate', function autoStatusOnUpdate(next) {
+  const update = this.getUpdate() || {};
+  const quantity = update.quantity;
+  const minStock = update.minStock;
+
+  if (quantity === undefined && minStock === undefined) {
+    return next();
+  }
+
+  update.status = calculateStatus(quantity, minStock);
+  this.setUpdate(update);
+  next();
 });
 
 module.exports = mongoose.model('Task', taskSchema);

@@ -35,35 +35,34 @@ function validateLogin(req, res, next) {
 }
 
 function validateTask(req, res, next) {
-  const { customerName, phone, dateTime, people, tableNumber, status, notes } = req.body;
+  const { productName, category, unit, quantity, minStock, supplier, notes } = req.body;
 
-  if (!customerName || customerName.trim().length < 2) {
-    return res.status(400).json({ message: 'El nombre del cliente es obligatorio.' });
+  if (!productName || productName.trim().length < 2) {
+    return res.status(400).json({ message: 'El nombre del producto es obligatorio.' });
   }
 
-  if (!phone || phone.trim().length < 7) {
-    return res.status(400).json({ message: 'El teléfono es obligatorio y debe ser válido.' });
+  if (!category || category.trim().length < 2) {
+    return res.status(400).json({ message: 'La categoría es obligatoria.' });
   }
 
-  const parsedDate = new Date(dateTime);
-  if (!dateTime || Number.isNaN(parsedDate.getTime())) {
-    return res.status(400).json({ message: 'Fecha/hora inválida.' });
+  if (!unit || !['kg', 'litros', 'piezas', 'cajas'].includes(unit)) {
+    return res.status(400).json({ message: 'La unidad es inválida.' });
   }
 
-  const parsedPeople = Number(people);
-  if (!Number.isInteger(parsedPeople) || parsedPeople < 1 || parsedPeople > 30) {
-    return res.status(400).json({ message: 'Las personas deben ser un entero entre 1 y 30.' });
+  const parsedQuantity = Number(quantity);
+  if (!Number.isFinite(parsedQuantity) || parsedQuantity < 0 || parsedQuantity > 100000) {
+    return res.status(400).json({ message: 'La cantidad debe estar entre 0 y 100000.' });
   }
 
-  if (tableNumber !== undefined && tableNumber !== null && tableNumber !== '') {
-    const parsedTable = Number(tableNumber);
-    if (!Number.isInteger(parsedTable) || parsedTable < 1 || parsedTable > 200) {
-      return res.status(400).json({ message: 'La mesa debe ser un entero entre 1 y 200.' });
+  if (minStock !== undefined && minStock !== null && minStock !== '') {
+    const parsedMinStock = Number(minStock);
+    if (!Number.isFinite(parsedMinStock) || parsedMinStock < 0 || parsedMinStock > 100000) {
+      return res.status(400).json({ message: 'El stock mínimo debe estar entre 0 y 100000.' });
     }
   }
 
-  if (status && !['pendiente', 'confirmada', 'cancelada'].includes(status)) {
-    return res.status(400).json({ message: 'Estado inválido.' });
+  if (supplier && supplier.trim().length > 120) {
+    return res.status(400).json({ message: 'El proveedor no puede superar 120 caracteres.' });
   }
 
   if (notes && notes.length > 400) {

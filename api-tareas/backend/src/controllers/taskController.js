@@ -4,7 +4,7 @@ const { syncTasksForUser } = require('../services/taskFileStorage');
 async function listTasks(req, res, next) {
   try {
     const tasks = await Task.find({ user: req.session.userId })
-      .sort({ dateTime: 1, createdAt: -1 });
+      .sort({ category: 1, productName: 1, createdAt: -1 });
 
     res.json(tasks);
   } catch (error) {
@@ -35,7 +35,7 @@ async function getTaskById(req, res, next) {
     });
 
     if (!task) {
-      return res.status(404).json({ message: 'Tarea no encontrada.' });
+      return res.status(404).json({ message: 'Producto no encontrado.' });
     }
 
     res.json(task);
@@ -53,7 +53,7 @@ async function updateTask(req, res, next) {
     );
 
     if (!task) {
-      return res.status(404).json({ message: 'Tarea no encontrada.' });
+      return res.status(404).json({ message: 'Producto no encontrado.' });
     }
 
     await syncTasksForUser(req.session.userId);
@@ -72,12 +72,12 @@ async function deleteTask(req, res, next) {
     });
 
     if (!task) {
-      return res.status(404).json({ message: 'Tarea no encontrada.' });
+      return res.status(404).json({ message: 'Producto no encontrado.' });
     }
 
     await syncTasksForUser(req.session.userId);
 
-    res.json({ message: 'Tarea eliminada correctamente.' });
+    res.json({ message: 'Producto eliminado correctamente.' });
   } catch (error) {
     next(error);
   }
@@ -86,7 +86,7 @@ async function deleteTask(req, res, next) {
 async function syncToFile(req, res, next) {
   try {
     await syncTasksForUser(req.session.userId);
-    res.json({ message: 'Tareas sincronizadas en archivo JSON.' });
+    res.json({ message: 'Inventario sincronizado en archivo JSON.' });
   } catch (error) {
     next(error);
   }

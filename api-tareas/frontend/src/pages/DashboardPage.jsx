@@ -30,10 +30,10 @@ function DashboardPage({ user, onLogout }) {
       if (editingTask) {
         await api.updateTask(editingTask._id, payload);
         setEditingTask(null);
-        setMessage('Cita actualizada correctamente.');
+        setMessage('Producto actualizado correctamente.');
       } else {
         await api.createTask(payload);
-        setMessage('Cita creada correctamente.');
+        setMessage('Producto creado correctamente.');
       }
 
       await loadTasks();
@@ -49,7 +49,7 @@ function DashboardPage({ user, onLogout }) {
     try {
       await api.deleteTask(id);
       await loadTasks();
-      setMessage('Cita eliminada correctamente.');
+      setMessage('Producto eliminado correctamente.');
     } catch (err) {
       setError(err.message);
     }
@@ -81,7 +81,7 @@ function DashboardPage({ user, onLogout }) {
     <main className="container">
       <header className="header">
         <div>
-          <h1>Gestor de Citas - Restaurante</h1>
+          <h1>Gestor de Inventario - Restaurante</h1>
           <p>Bienvenido, {user.name}</p>
         </div>
 

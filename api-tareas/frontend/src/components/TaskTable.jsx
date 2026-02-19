@@ -1,24 +1,28 @@
-function formatDate(date) {
-  return new Date(date).toLocaleString('es-MX');
-}
-
 function TaskTable({ tasks, onEdit, onDelete }) {
+  const formatStatus = (status) => status.replace('_', ' ');
+  const statusClass = (status) => {
+    if (status === 'agotado') return 'status-badge status-agotado';
+    if (status === 'bajo_stock') return 'status-badge status-bajo-stock';
+    return 'status-badge status-disponible';
+  };
+
   if (!tasks.length) {
-    return <div className="card">No hay citas registradas.</div>;
+    return <div className="card">No hay productos registrados.</div>;
   }
 
   return (
     <div className="card">
-      <h2>Citas registradas</h2>
+      <h2>Inventario actual</h2>
       <div className="table-wrapper">
         <table>
           <thead>
             <tr>
-              <th>Cliente</th>
-              <th>Teléfono</th>
-              <th>Fecha/Hora</th>
-              <th>Personas</th>
-              <th>Mesa</th>
+              <th>Producto</th>
+              <th>Categoría</th>
+              <th>Unidad</th>
+              <th>Cantidad</th>
+              <th>Stock mín.</th>
+              <th>Proveedor</th>
               <th>Estado</th>
               <th>Acciones</th>
             </tr>
@@ -26,12 +30,15 @@ function TaskTable({ tasks, onEdit, onDelete }) {
           <tbody>
             {tasks.map((task) => (
               <tr key={task._id}>
-                <td>{task.customerName}</td>
-                <td>{task.phone}</td>
-                <td>{formatDate(task.dateTime)}</td>
-                <td>{task.people}</td>
-                <td>{task.tableNumber || '-'}</td>
-                <td>{task.status}</td>
+                <td>{task.productName}</td>
+                <td>{task.category}</td>
+                <td>{task.unit}</td>
+                <td>{task.quantity}</td>
+                <td>{task.minStock}</td>
+                <td>{task.supplier || '-'}</td>
+                <td>
+                  <span className={statusClass(task.status)}>{formatStatus(task.status)}</span>
+                </td>
                 <td className="actions-cell">
                   <button type="button" onClick={() => onEdit(task)}>Editar</button>
                   <button type="button" className="btn-danger" onClick={() => onDelete(task._id)}>
