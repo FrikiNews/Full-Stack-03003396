@@ -31,7 +31,7 @@ describe('roleMiddleware', () => {
 
   test('bloquea cuando role no está permitido', () => {
     const middleware = roleMiddleware('admin');
-    const req = { user: { role: 'employee' } };
+    const req = { user: { role: 'usuario' } };
     const res = createMockRes();
     const next = jest.fn();
 
@@ -43,8 +43,8 @@ describe('roleMiddleware', () => {
   });
 
   test('permite cuando role está en allowedRoles', () => {
-    const middleware = roleMiddleware('admin', 'employee');
-    const req = { user: { role: 'employee' } };
+    const middleware = roleMiddleware('admin', 'usuario');
+    const req = { user: { role: 'usuario' } };
     const res = createMockRes();
     const next = jest.fn();
 

@@ -9,7 +9,7 @@
 ## Funcionalidades
 
 - Login y registro con JWT.
-- Roles: `admin` y `employee`.
+- Roles: `admin` y `usuario`.
 - CRUD de medicamentos (crear/editar/eliminar solo admin).
 - Catálogo con búsqueda, categorías, secciones y promociones.
 - Carrito y flujo de pago (demo).

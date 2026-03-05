@@ -97,7 +97,7 @@ function DashboardPage({ user, onLogout }) {
   const offersRef = useRef(null);
 
   const isAdmin = user?.role === 'admin';
-  const accountTypeLabel = isAdmin ? 'Admin' : 'Consumidor';
+  const accountTypeLabel = isAdmin ? 'Admin' : 'Usuario';
 
   async function fetchMedicines(nextPage = page, nextSearch = appliedSearch, nextCategory = category) {
     try {
@@ -540,7 +540,7 @@ function DashboardPage({ user, onLogout }) {
                       {inventoryOpen ? 'Cerrar inventario' : 'Inventario'}
                     </button>
                   ) : (
-                    <span className="account-note">Usuario empleado</span>
+                    <span className="account-note">Usuario</span>
                   )}
                   <button className="danger" onClick={onLogout} role="menuitem">
                     Cerrar sesión

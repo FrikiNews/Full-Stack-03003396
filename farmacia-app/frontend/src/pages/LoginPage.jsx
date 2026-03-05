@@ -6,7 +6,7 @@ function LoginPage({ onLogin }) {
     name: '',
     email: '',
     password: '',
-    role: 'employee'
+    role: 'usuario'
   });
   const [error, setError] = useState('');
 
@@ -53,7 +53,7 @@ function LoginPage({ onLogin }) {
 
         {isRegister && (
           <select name="role" value={formData.role} onChange={handleChange}>
-            <option value="employee">Empleado</option>
+            <option value="usuario">Usuario</option>
             <option value="admin">Administrador</option>
           </select>
         )}

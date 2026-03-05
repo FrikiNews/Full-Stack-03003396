@@ -49,7 +49,7 @@ describe('Integración /api/auth/login', () => {
       _id: 'user-1',
       email: 'empleado@test.com',
       password: 'hash_guardado',
-      role: 'employee',
+      role: 'usuario',
       name: 'Empleado'
     });
     bcrypt.compare.mockResolvedValue(false);

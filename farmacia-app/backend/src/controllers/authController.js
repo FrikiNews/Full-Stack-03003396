@@ -29,7 +29,7 @@ async function register(req, res) {
       name,
       email,
       password: hashedPassword,
-      role: role === 'admin' ? 'admin' : 'employee'
+      role: role === 'admin' ? 'admin' : 'usuario'
     });
 
     const token = createToken(user);
