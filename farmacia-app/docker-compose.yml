@@ -1,0 +1,43 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: farmacia-mongo
+    restart: unless-stopped
+    volumes:
+      - mongo_data:/data/db
+      - ./database-model/init.js:/docker-entrypoint-initdb.d/01-init.js:ro
+      - ./database-model/seed.js:/docker-entrypoint-initdb.d/02-seed.js:ro
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: ./backend
+    container_name: farmacia-backend
+    restart: unless-stopped
+    environment:
+      PORT: 4000
+      MONGODB_URI: mongodb://mongo:27017/farmacia_db
+      JWT_SECRET: super_secret_farmacia
+      AUTO_SEED_ON_START: "true"
+    ports:
+      - "4000:4000"
+    depends_on:
+      mongo:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: farmacia-frontend
+    restart: unless-stopped
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
+volumes:
+  mongo_data:
